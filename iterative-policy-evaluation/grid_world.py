@@ -32,7 +32,7 @@ class Grid: # Environment
 
   def move(self, action):
     # check if legal move first
-    if action in self.actions[(self.i, self.j)]:
+    if action in self.actions.get((self.i, self.j), []):
       if action == 'U':
         self.i -= 1
       elif action == 'D':
@@ -41,6 +41,7 @@ class Grid: # Environment
         self.j += 1
       elif action == 'L':
         self.j -= 1
+ 
     # return a reward (if any)
     return self.rewards.get((self.i, self.j), 0)
 
