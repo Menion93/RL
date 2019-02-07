@@ -8,6 +8,7 @@ state.
 '''
 
 threshold = 0.0001
+discount = 0.9
 
 def update_vs(vs, env):
   states = env.all_states()
@@ -20,7 +21,7 @@ def update_vs(vs, env):
       print(env.current_state(), a)
       reward = env.move(a)
       if not (env.current_state() == s):
-        rewards_vs.append(reward + vs.get(env.current_state(),0))
+        rewards_vs.append(reward + discount*vs.get(env.current_state(),0))
         env.undo_move(a)
     
     computed_vs = np.mean(rewards_vs) if len(rewards_vs) != 0 else 0
