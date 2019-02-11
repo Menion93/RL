@@ -1,4 +1,5 @@
 from grid_world import standard_grid
+from helpers import *
 import numpy as np
 
 '''
@@ -84,22 +85,12 @@ def policy_iteration(env):
         policy[s] = b_action
         policy_changed = True
 
-  return policy
-
-def render_policy(env, policy):
-  policy_str = '-'*26 + '\n'
-  for i in range(env.rows):
-    for j in range(env.cols):
-      action = policy[(i, j)][0][0][0] if (i,j) in policy and policy[(i, j)] is not None else 'x'
-      policy_str +=  action + '\t'
-    policy_str += '\n'
-  policy_str += '-' * 26 + '\n'
-
-  print(policy_str)
+  return policy, vs
 
 def main():
   env = standard_grid()
-  policy = policy_iteration(env)
+  policy, vs = policy_iteration(env)
+  render_vs(env, vs)
   render_policy(env, policy)
 
 
