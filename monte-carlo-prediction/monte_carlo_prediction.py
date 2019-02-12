@@ -29,13 +29,12 @@ def random_policy():
   actions = ['U', 'D', 'L', 'R']
   return np.random.choice(actions)
 
-def monte_carlo_evaluation(create_env, policy, iterations=5000):
+def monte_carlo_evaluation(create_env, policy, iterations=10000):
   vs = {}
+  counts = {}
 
-  for n in range(iterations):
+  for _ in range(iterations):
     visited_states = []
-    vs = {}
-    counts = {}
     states, returns = run_episode(policy, vs, create_env)
 
     for s, g in zip(states, returns):
